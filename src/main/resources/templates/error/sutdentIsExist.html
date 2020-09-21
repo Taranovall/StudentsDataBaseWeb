@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta http-equiv="refresh" content="2;URL=/" />
+</head>
+<body>
+<h1 class="text-center" th:text="'Студент ' + ${student.firstName} + ' ' + ${student.lastName} + ' уже существует!'"/>
+</body>
+</html>
