@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "id")
     private Long id;
 
 
@@ -16,7 +16,7 @@ public class Student {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "number")
+    @Column(name = "number", unique = true)
     private String number;
     @Column(name = "age")
     private int age;

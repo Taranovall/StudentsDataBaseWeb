@@ -1,29 +1,36 @@
-package com.example.StudentDB.sql;
+package com.example.StudentDB.service;
 
 import com.example.StudentDB.entity.Student;
 import com.example.StudentDB.repository.StudentRepository;
+import com.example.StudentDB.service.impl.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
-public class SqlCommandsDefault implements SqlCommands {
+public class StudentServiceDefault implements StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
 
-
     @Override
     public Student getStudent(Long id) {
-        return studentRepository.getOne(id);
+        Optional<Student> studentId = studentRepository.findById(id);
+        return studentId.orElse(null);
+    }
 
+    public Student getStudentByNumber(String number) {
+        Optional<Student> studentByNumber = Optional.ofNullable(studentRepository.findByNumber(number));
+        return studentByNumber.orElse(null);
     }
 
     @Override
-    public void add(Student student) {
+    public boolean add(Student student) {
         studentRepository.save(student);
+        return true;
     }
 
 
@@ -50,8 +57,6 @@ public class SqlCommandsDefault implements SqlCommands {
         }
         return false;
     }
-
-
 
 
 }

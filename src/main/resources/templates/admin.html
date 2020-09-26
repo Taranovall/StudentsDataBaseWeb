@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5 mb-5 text-center">
+    <h1>Список пользователей</h1><br>
+    <p th:if="${removeAdmin}" class="error alert alert-primary" role="alert">You can`t remove user with role 'admin'</p>
+    <table class="table table-bordered table-hover ">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="el : ${allUsers}">
+            <td th:text="${el.id}"/>
+            <td th:text="${el.username}"/>
+            <td th:text="${el.password}"/>
+            <div th:each="role : ${el.roles}">
+            <div th:switch="${role.name}">
+             <td th:case="ROLE_ADMIN" th:if="${el.rolesCount == 2}">ADMIN</td>
+             <td th:case="ROLE_USER" th:if="${el.rolesCount == 1}">USER</td>
+            </div></div>
+            <td>
+                <form th:action="'/admin/remove/' + ${el.id}" method="post">
+                    <button class="btn btn-outline-dark" type="submit">Удалить</button>
+                </form>
+            </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>

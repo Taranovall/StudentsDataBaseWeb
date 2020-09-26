@@ -9,6 +9,10 @@
 <body>
 <div class="container mt-5 mb-5 text-center">
     <h1>Добавление Студента</h1><br>
+    <p th:if="${studentIsExist}" class="error alert alert-warning" role="alert"
+       th:text="'Student ' + ${student.firstName} + ' ' + ${student.lastName} + ' already exist!'"/>
+    <p th:if="${numberIsExist}" class="error alert alert-warning" role="alert"
+       th:text="'Number ' + ${student.number} + ' is already taken!'"/>
     <form action="/add" method="post">
         <input type="text" name="firstName" placeholder="Имя" class="form-control"><br>
         <input type="text" name="lastName" placeholder="Фамилия" class="form-control"><br>

@@ -7,6 +7,10 @@
 </head>
 <body>
 <div class="container mt-5 mb-5 text-center">
+    <p th:if="${studentIsExist}" class="error alert alert-warning" role="alert"
+       th:text="'Student ' + ${firstName} + ' ' + ${lastName} + ' already exist!'"/>
+    <p th:if="${numberIsExist}" class="error alert alert-warning" role="alert"
+       th:text="'Number ' + ${number} + ' is already taken!'"/>
     <div th:each="el : ${student}">
     <table  class="table">
         <form method="post">
