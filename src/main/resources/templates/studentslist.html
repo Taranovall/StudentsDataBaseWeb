@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+
+    <title>Students Web</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<nav th:insert="fragments :: nav"></nav>
+<div class="container mt-5 mb-5 text-center">
+    <h1>Список студентов</h1><br>
+
+    <table class="table">
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Номер</th>
+            <th>Класс</th>
+            <th sec:authorize="hasRole('ADMIN')"></th>
+        </tr>
+        <tr th:each="el : ${students}">
+            <td th:text="${el.firstName}"/>
+            <td th:text="${el.lastName}"/>
+            <td th:text="${el.age}"/>
+            <td th:text="${el.number}"/>
+            <td th:text="${el.clas} + ${el.subClass}"/>
+            <td sec:authorize="hasRole('ADMIN')"><a th:href="'/edit/' + ${el.id}" class="btn btn-success">Редактировать</a></td>
+        </tr>
+    </table>
+    <a sec:authorize="hasRole('ADMIN')" th:href="add" class="btn btn-success">Добавить студента</a>
+
+
+
+
+</div>
+</body>
+</html>
