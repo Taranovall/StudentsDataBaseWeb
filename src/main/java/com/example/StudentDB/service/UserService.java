@@ -21,6 +21,7 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
     RoleRepository roleRepository;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -51,6 +52,10 @@ public class UserService implements UserDetailsService {
 
         if (userFromDB != null) {
             return false;
+        }
+        if (roleRepository.count() == 0) {
+            roleRepository.save(new Role(1L,"ROLE_USER"));
+            roleRepository.save(new Role(2L,"ROLE_ADMIN"));
         }
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setRegistrationDate(new SimpleDateFormat("MM.dd.yyyy HH:mm").format(Calendar.getInstance().getTime()));
